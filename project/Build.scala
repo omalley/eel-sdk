@@ -14,12 +14,13 @@ object Build extends Build {
   val ExtsVersion = "1.37.0"
   val H2Version = "1.4.192"
   val HadoopVersion = "2.6.4"
-  val HiveVersion = "1.2.1"
+  val HiveVersion = "2.1.1"
+  val HiveStorageVersion = "2.2.1"
   val JacksonVersion = "2.8.4"
   val Log4jVersion = "1.2.17"
   val MetricsVersion = "3.1.2"
   val MysqlVersion = "5.1.39"
-  val OrcVersion = "1.3.0"
+  val OrcVersion = "1.3.3"
   val ParquetVersion = "1.9.0"
   val ScalaVersion = "2.11.8"
   val ScalatestVersion = "3.0.0"
@@ -32,7 +33,9 @@ object Build extends Build {
   val hiveSettings = Seq(
     libraryDependencies ++= Seq(
       "org.apache.hadoop"   % "hadoop-yarn"               % HadoopVersion,
-      "org.apache.hive"     % "hive-exec"                 % HiveVersion exclude("org.pentaho", "pentaho-aggdesigner-algorithm") exclude("org.apache.calcite", "calcite-core") exclude("org.apache.calcite", "calcite-avatica") exclude("org.apache.logging.log4j", "log4j-slf4j-impl"),
+      "org.apache.hive"     % "hive-exec"                 % HiveVersion classifier "core" exclude("org.apache.hive", "hive-orc") exclude("org.apache.hive", "hive-storage-api") exclude("org.pentaho", "pentaho-aggdesigner-algorithm") exclude("org.apache.calcite", "calcite-core") exclude("org.apache.calcite", "calcite-avatica") exclude("org.apache.logging.log4j", "log4j-slf4j-impl"),
+      "org.apache.hive" % "hive-storage-api" % HiveStorageVersion,
+      "org.apache.orc" % "orc-core" % OrcVersion,
       "org.apache.logging.log4j" % "log4j-api"            % "2.7"     % "test",
       "org.apache.logging.log4j" % "log4j-core"           % "2.7"     % "test",
       "org.apache.logging.log4j" % "log4j-slf4j-impl"     % "2.7"     % "test"
